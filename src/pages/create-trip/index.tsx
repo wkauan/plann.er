@@ -76,8 +76,8 @@ export function CreateTripPage() {
 
     setEmailsToInvite(newEmailList);
   }
-
-  async function createTrip(event: FormEvent<HTMLFormElement>) {
+    
+    async function createTrip(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!destination) {
