@@ -39,7 +39,7 @@ export function Activities() {
             </div>
             <p className="text-zinc-500 text-sm">
               {category.activities.length > 0 ? (
-                <div>
+                <div className="space-y-2.5">
                   {category.activities.map((activity) => {
                     return (
                       <div key={activity.id} className="space-y-2.5">
