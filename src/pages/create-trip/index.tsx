@@ -1,9 +1,9 @@
-import { FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { InviteGuestsModal } from './invite-guests-modal';
-import { ConfirmTripModal } from './confirm-trip-modal';
-import { DestinationAndDateStep } from './steps/destination-and-date-step';
-import { InviteGuestsStep } from './steps/invite-guests-step';
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { InviteGuestsModal } from "./invite-guests-modal";
+import { ConfirmTripModal } from "./confirm-trip-modal";
+import { DestinationAndDateStep } from "./steps/destination-and-date-step";
+import { InviteGuestsStep } from "./steps/invite-guests-step";
 
 export function CreateTripPage() {
   const navigate = useNavigate();
@@ -12,11 +12,17 @@ export function CreateTripPage() {
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false);
   const [isConfirmTripModalOpen, setIsConfirmTripModalOpen] = useState(false);
   const [emailsToInvite, setEmailsToInvite] = useState([
-    'kauan@gmail.com',
-    'jonh@gmail.com',
-    'ronaldo@gmail.com',
-    'pedro@gmail.com',
+    "kauan@gmail.com",
+    "jonh@gmail.com",
+    "ronaldo@gmail.com",
+    "pedro@gmail.com",
   ]);
+  const [destination, setDestination] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [ownerEmail, setOwnerEmail] = useState("");
+  const [eventStartAndEndDates, setEventStartAndEndDates] = useState<
+    DateRange | undefined
+  >();
 
   function openGuestsInput() {
     setIsGuestsInputOpen(true);
@@ -46,7 +52,7 @@ export function CreateTripPage() {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
-    const email = data.get('email')?.toString();
+    const email = data.get("email")?.toString();
 
     if (!email) {
       return;
@@ -72,7 +78,7 @@ export function CreateTripPage() {
   function createTrip(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    navigate('/trips/123');
+    // navigate("/trips/123");
   }
 
   return (
@@ -90,6 +96,9 @@ export function CreateTripPage() {
             isGuestsInputOpen={isGuestsInputOpen}
             openGuestsInput={openGuestsInput}
             closeGuestsInput={closeGuestsInput}
+            setDestination={setDestination}
+            eventStartAndEndDates={eventStartAndEndDates}
+            setEventStartAndEndDates={setEventStartAndEndDates}
           />
 
           {isGuestsInputOpen && (
@@ -104,11 +113,11 @@ export function CreateTripPage() {
         <p className="text-sm text-zinc-500">
           Ao planejar sua viagem pela plann.er você automaticamente concorda
           <br />
-          com nossos{' '}
+          com nossos{" "}
           <a className="text-zinc-300 underline" href="#">
             termos de uso
-          </a>{' '}
-          e{' '}
+          </a>{" "}
+          e{" "}
           <a className="text-zinc-300 underline" href="#">
             políticas de privacidade.
           </a>
@@ -128,6 +137,8 @@ export function CreateTripPage() {
         <ConfirmTripModal
           closeConfirmTripModal={closeConfirmTripModal}
           createTrip={createTrip}
+          setOwnerName={setOwnerName}
+          setOwnerEmail={setOwnerEmail}
         />
       )}
     </div>
